@@ -22,6 +22,9 @@ Para uma empresa fictícia de sucos, no curso foi implementado um modelo de Busi
 ## Tecnologias utilizadas neste projeto:
 <img height="20" src="https://img.shields.io/badge/Visual_Studio-purple"> <img height="20" src="https://img.shields.io/badge/SQL_Server-green"> <img height="20" src="https://img.shields.io/badge/SSDT-yellow"> <img height="20" src="https://img.shields.io/badge/TSQL-orange">
 
+## Como reproduzir este repositório?
+Você pode fazer um `git clone` do repositório para a sua máquina.
+
 ## Licença
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
