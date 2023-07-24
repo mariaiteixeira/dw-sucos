@@ -1,6 +1,6 @@
 # Data Warehouse Sucos
 
-Projeto desenvolvido pelo curso [ETL com Integration Services: modelo de dados](https://cursos.alura.com.br/course/business-intelligence-sql-server-e-integration-services), na plataforma da **[Alura](https://www.alura.com.br/)**.
+Projeto desenvolvido pelos cursos [ETL com Integration Services: modelo de dados](https://cursos.alura.com.br/course/business-intelligence-sql-server-e-integration-services) e [ETL com Integration Services: transformação de dados](https://cursos.alura.com.br/course/business-intelligence-sql-server-e-integration-services-parte2), na plataforma da **[Alura](https://www.alura.com.br/)**.
 
 <div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do dashboard Alura Pets"></div>
 
@@ -15,7 +15,14 @@ Para uma empresa fictícia de sucos, no curso foi implementado um modelo de Busi
 - Criação do banco de dados;
 - Criação do projeto no Visual Studio;
 - Criação das tabelas com as chaves primárias e estrangeiras por *grid* e T-SQL no Visual Studio;
-- Carga de uma das dimensões (fábrica, em específico);
+- Como carregar dados em diferentes dimensões;
+- Assistente de *Origem* e *Destino*;
+- Etapa *Coluna Derivada*;
+- Etapa *Classificar*;
+- Etapa *Junção de Mesclagem*;
+- Transformação *Copiar Coluna*;
+- Etapa *Conversão de dados*;
+- Etapa *Dimensão de Alteração Lenta*;
 - Como fazer a conversão de dados dentro do Visual Studio;
 - Como iniciar o processo para poder ver a mudança dentro do SSMS (SQL Server Management Studio).
 
