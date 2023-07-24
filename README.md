@@ -5,7 +5,9 @@ Projeto desenvolvido pelos cursos [ETL com Integration Services: modelo de dados
 <div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do dashboard Alura Pets"></div>
 
 ## Sobre o projeto
-Para uma empresa fictícia de sucos, no curso foi implementado um modelo de Business Intelligence com o Data Warehouse. Criou-se o banco de dados, as tabelas de dimensões e de fato (tanto por grid quanto por T-SQL) e também foram carregados dados na dimensão. 
+Para uma empresa fictícia de sucos, no primeiro curso foi implementado um modelo de Business Intelligence com o Data Warehouse. Criou-se o banco de dados, as tabelas de dimensões e de fato (tanto por grid quanto por T-SQL) e também foram carregados dados na dimensão.
+
+No segundo, os dados além de serem carregados também foram transformados em diversas dimensões.
 
 ## Ao longo do projeto, as seguintes habilidades foram desenvolvidas:
 - Matriz (dimensão e indicador);
