@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="CargaDimensoes"
   DTS:PackageType="5"
-  DTS:VersionBuild="24"
-  DTS:VersionGUID="{CAEA2A34-9889-414C-A508-9C07384EAD79}">
+  DTS:VersionBuild="29"
+  DTS:VersionGUID="{1FE37BCA-57D6-4428-8609-790D6B797B53}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -76,6 +76,44 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões de Arquivos Simples 1]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{76540A64-056D-4853-A9B1-C682EAEC7C70}"
+      DTS:ObjectName="Gerenciador de Conexões de Arquivos Simples 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1046"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="65001"
+          DTS:ConnectionString="C:\Users\Maria\Downloads\ETL 2-Aula 3\Arquivos - Aula 3\MARCAS E CATEGORIAS.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x003B_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MARCA"
+              DTS:DTSID="{90849C9A-AC35-420D-AFAF-1B380624028F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CATEGORIA"
+              DTS:DTSID="{C54B1891-9CC0-457A-AF26-DEEAE2E7E448}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
       DTS:refId="Package.ConnectionManagers[Gerenciador de Conexões do Excel]"
       DTS:CreationName="EXCEL"
       DTS:DTSID="{B034AD57-5C74-497C-BCF8-F28012AE0230}"
@@ -96,7 +134,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Maria\Downloads\ETL 2\Arquivos - Aula 2\CADASTRO DE CLIENTES.xlsx;Extended Properties=&quot;Excel 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Maria\Downloads\ETL 2\Arquivos - Aula 2\CADASTRO DE CLIENTES.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -106,6 +144,7 @@
       DTS:refId="Package\Criação da Dimensão Cliente"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarefa Fluxo de Dados"
+      DTS:Disabled="True"
       DTS:DTSID="{CCDA0791-2D0D-4337-804A-D9FF3E88866A}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
@@ -3663,6 +3702,957 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Criação da DImensão Produto - Nível Categoria"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Tarefa Fluxo de Dados"
+      DTS:DTSID="{D9822E2E-C80C-46F9-808B-5EA0485982CA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Criação da DImensão Produto - Nível Categoria"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Categoria] SET [Desc_Categoria] = ? WHERE [Cod_Categoria] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Cod_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cod_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]" />
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].Columns[Desc_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Desc_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="200"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="Comando OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;2"
+              description="Executa uma instrução SQL para cada linha em um fluxo de dados. Por exemplo, chame um procedimento armazenado 'new employee setup' para cada linha da tabela 'new employees'. Observação: a execução de uma instrução SQL para cada linha de um fluxo de dados grande pode demorar."
+              name="Comando OLE DB 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[Dim_Categoria] SET [Desc_Categoria] = ? WHERE [Cod_Categoria] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+                  errorOrTruncationOperation="Execução de Comando"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Comando OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Cod_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cod_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]" />
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].Columns[Desc_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Desc_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="200"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Informações de parâmetro. Corresponde os valores de DBPARAMFLAGSENUM de OLE DB."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Comando OLE DB]"
+                  exclusionGroup="1"
+                  name="Saída de Comando OLE DB"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Comando OLE DB"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Outputs[Saída de Erro de Comando OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Conversão de Dados;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Conversão de Dados"
+              name="Converte para NVARCHAR"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados]"
+                  name="Entrada de Conversão de Dados">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados].Columns[CATEGORIA]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CATEGORIA"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]" />
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados].Columns[ID_CATEGORIA]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ID_CATEGORIA"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna].Columns[ID_CATEGORIA]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados]"
+                  exclusionGroup="1"
+                  name="Saída de Conversão de Dados"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="200"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]"
+                      name="Desc_Categoria"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]"
+                      name="Cod_Categoria"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica a coluna de entrada usada como a origem dois dados para a conversão."
+                          name="SourceInputColumnLineageID">#{Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna].Columns[ID_CATEGORIA]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Erro de Conversão de Dados]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Conversão de Dados"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Erro de Conversão de Dados].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código"
+              componentClassID="Microsoft.CopyMap"
+              contactInfo="Copiar Coluna;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;0"
+              description="Copia colunas de entrada em novas colunas na saída da transformação. Por exemplo, crie uma cópia da coluna 'address' para que ela possa ser limpa por transformações subsequentes e deixar a coluna original no lugar para fins de auditoria."
+              name="Cria a coluna do código">
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Inputs[Copiar Entrada de Coluna]"
+                  name="Copiar Entrada de Coluna">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Inputs[Copiar Entrada de Coluna].Columns[CATEGORIA]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CATEGORIA"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna]"
+                  name="Copiar Saída de Coluna"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Inputs[Copiar Entrada de Coluna]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna].Columns[ID_CATEGORIA]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna].Columns[ID_CATEGORIA]"
+                      name="ID_CATEGORIA">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica o identificador de linhagem da coluna a ser copiada."
+                          name="copyColumnId">#{Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Classificar;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Classifica os dados de entrada em ordem crescente ou decrescente quando eles não podem ser classificados em sua origem. Por exemplo, classifique dados de vendas por 'customer id' antes de eles serem gravados em um arquivo simples e entregues a outro departamento. Observação: essa transformação não é recomendável para fluxos de dados grandes."
+              name="Extra apenas as categorias sem repeti-las"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação Classificação remove linhas com valores de classificação duplicados."
+                  name="EliminateDuplicates">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o número máximo de threads a usar para classificação."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Inputs[Classificar Entrada]"
+                  name="Classificar Entrada">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Inputs[Classificar Entrada].Columns[MARCA]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="MARCA"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[MARCA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica as opções de comparação para os dados de caractere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica a ordem de classificação da coluna."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Inputs[Classificar Entrada].Columns[CATEGORIA]"
+                      cachedCodepage="65001"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="CATEGORIA"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[CATEGORIA]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica as opções de comparação para os dados de caractere."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Especifica a ordem de classificação da coluna."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída]"
+                  isSorted="true"
+                  name="Classificar Saída">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[MARCA]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[MARCA]"
+                      name="MARCA">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica o identificador de linhagem da coluna de entrada associada à coluna de saída."
+                          name="SortColumnId">#{Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[MARCA]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída].Columns[CATEGORIA]"
+                      name="CATEGORIA"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Especifica o identificador de linhagem da coluna de entrada associada à coluna de saída."
+                          name="SortColumnId">#{Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[CATEGORIA]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria"
+              componentClassID="Microsoft.SCD"
+              contactInfo="Dimensão de Alteração Lenta;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;3"
+              description="Atualiza uma dimensão de data warehouse do SQL Server Analysis Services. Atualize registros da dimensão que já estejam presentes e insira os registros que não estão. Por exemplo, atualize a tabela DimProduct do banco de dados OLAP AdventureWorksDW com dados da tabela Products do banco de dados OLTP AdventureWorks."
+              name="Gravação na Tabela Categoria"
+              version="3">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Especifica a instrução SELECT usada para criar um conjunto de linhas de esquema."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT [Cod_Categoria], [Desc_Categoria] FROM [dbo].[Dim_Categoria]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a cláusula WHERE na instrução SELECT que seleciona a linha atual entre as linhas com chaves de negócios idênticas."
+                  name="CurrentRowWhere"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de atributo de histórico são direcionadas para a saída de transformação para atualizações de atributo de alteração."
+                  name="UpdateChangingAttributeHistory">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando as colunas com atributos fixos contiverem alterações."
+                  name="FailOnFixedAttributeChange">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome da coluna para o membro inferido."
+                  name="InferredMemberIndicator"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as atualizações de membro inferido são detectadas."
+                  name="EnableInferredMember">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se a transformação falhará quando uma pesquisa de registro existente falhar."
+                  name="FailOnLookupFailure">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica que todas as linhas na entrada são novas ou a transformação detecta o tipo de alteração."
+                  name="IncomingRowChangeType"
+                  typeConverter="IncomingRowChangeType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Connections[LookupConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  description="Define a conexão a ser usada para pesquisas na tabela de dimensão"
+                  name="LookupConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]"
+                  name="Entrada de Dimensão de Alteração Lenta">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Cod_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cod_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[Cod_Categoria]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].Columns[Desc_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Desc_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[Desc_Categoria]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          name="ColumnType"
+                          typeConverter="ColumnType">2</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[Cod_Categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="Cod_Categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta].ExternalColumns[Desc_Categoria]"
+                      dataType="wstr"
+                      length="200"
+                      name="Desc_Categoria" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída Inalterada]"
+                  description="Linhas inalteradas"
+                  exclusionGroup="1"
+                  name="Saída Inalterada"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Nova Saída]"
+                  description="Novas linhas"
+                  exclusionGroup="1"
+                  name="Nova Saída"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Atributo Fixo]"
+                  description="Linhas com alterações em colunas marcadas com FixedAttribute"
+                  exclusionGroup="1"
+                  name="Saída de Atributo Fixo"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Atualizações de Atributo de Alteração]"
+                  description="Essas linhas contêm novas informações para as alterações da coluna ChangingAttribute (Type 1)"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Atributo de Alteração"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Inserções de Atributo de Histórico]"
+                  description="O resultado de alterações de HistoricalAttribute (Type 2) nessas novas linhas"
+                  exclusionGroup="2"
+                  name="Saída de Inserções de Atributo de Histórico"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Atualizações de Membro Inferido]"
+                  description="Informações para atualizar a linha de dimensão inicial sem preenchimento"
+                  exclusionGroup="1"
+                  name="Saída de Atualizações de Membro Inferido"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Destino OLE DB;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;4"
+              description="Destino OLE DB"
+              name="Inserir Destino"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="O tempo em segundos antes que um comando expire. Zero indica uma expiração infinita."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowset">[dbo].[Dim_Categoria]</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica a variável que contém o nome do objeto de banco de dados usado para abrir um conjunto de linhas."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="O comando SQL a ser executado."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica a página de código de coluna a ser usada quando não há informações de página de código disponíveis a partir da fonte de dados."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forca o uso do valor da propriedade DefaultCodePage durante a descrição dos dados de caractere."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica o modo usado para acessar o banco de dados."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se os valores fornecidos para colunas de identidade serão copiados no destino. Se false, os valores para colunas de identidade serão gerados automaticamente no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indica se as colunas que contêm null terão null inserido no destino. Se false, as colunas que contêm null terão seus valores padrão inseridos no destino. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica as opções a serem usadas com o carregamento rápido. Aplicável apenas se o carregamento rápido estiver ativado."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Especifica quando confirmações são emitidas durante a inserção de dados. Um valor de 0 especifica que uma confirmação será emitida ao final da inserção de dados. Aplicável somente se o carregamento rápido estiver ativado."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  connectionManagerRefId="Package.ConnectionManagers[Conexão com o Data Warehouse]"
+                  description="A conexão de tempo de execução OLE DB usada para acessar o banco de dados."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+                  errorOrTruncationOperation="Inserir"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Entrada de Destino OLE DB">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Cod_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Cod_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[Cod_Categoria]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Cod_Categoria]" />
+                    <inputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].Columns[Desc_Categoria]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Desc_Categoria"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[Desc_Categoria]"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados].Columns[Desc_Categoria]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[Cod_Categoria]"
+                      dataType="wstr"
+                      length="50"
+                      name="Cod_Categoria" />
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB].ExternalColumns[Desc_Categoria]"
+                      dataType="wstr"
+                      length="200"
+                      name="Desc_Categoria" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Saída de Erro de Destino OLE DB"
+                  synchronousInputId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Outputs[Saída de Erro de Destino OLE DB].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Origem de Arquivo Simples;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; Todos os Direitos Reservados; http://www.microsoft.com/sql/support;1"
+              description="Origem de Arquivo Simples"
+              localeId="1046"
+              name="Leitura de Marcas e Categorias"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Especifica se colunas de comprimento zero são tratadas como nulas."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Especifica o nome de uma coluna de saída que contém o nome do arquivo. Se nenhum nome for especificado, nenhuma coluna de saída contendo o nome de arquivo será gerada."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Gerenciador de Conexões de Arquivos Simples 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Gerenciador de Conexões de Arquivos Simples 1]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples]"
+                  name="Saída de Origem de Arquivo Simples">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[MARCA]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].ExternalColumns[MARCA]"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[MARCA]"
+                      name="MARCA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se os dados estão em formato binário."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[CATEGORIA]"
+                      codePage="65001"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversão"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].ExternalColumns[CATEGORIA]"
+                      length="50"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].Columns[CATEGORIA]"
+                      name="CATEGORIA"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se a coluna usa as rotinas de análise de localidade neutro mais rápidas."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indica se os dados estão em formato binário."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].ExternalColumns[MARCA]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="MARCA" />
+                    <externalMetadataColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples].ExternalColumns[CATEGORIA]"
+                      codePage="65001"
+                      dataType="str"
+                      length="50"
+                      name="CATEGORIA" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples]"
+                  isErrorOut="true"
+                  name="Saída de Erro de Origem de Arquivo Simples">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[Coluna de Saída de Erro de Origem de Arquivo Simples]"
+                      codePage="65001"
+                      dataType="text"
+                      description="Coluna de Saída de Erro de Origem de Arquivo Simples"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[Coluna de Saída de Erro de Origem de Arquivo Simples]"
+                      name="Coluna de Saída de Erro de Origem de Arquivo Simples" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Erro de Origem de Arquivo Simples].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Classificar Saída]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Inputs[Copiar Entrada de Coluna]"
+              name="Classificar Saída"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Outputs[Classificar Saída]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Copiar Saída de Coluna]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Inputs[Entrada de Conversão de Dados]"
+              name="Copiar Saída de Coluna"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código.Outputs[Copiar Saída de Coluna]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Nova Saída]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino.Inputs[Entrada de Destino OLE DB]"
+              name="Nova Saída"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Nova Saída]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Atualizações de Atributo de Alteração]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Atributo de Alteração"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Atualizações de Atributo de Alteração]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Atualizações de Membro Inferido]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB.Inputs[Entrada de Comando OLE DB]"
+              name="Saída de Atualizações de Membro Inferido"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Outputs[Saída de Atualizações de Membro Inferido]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Conversão de Dados]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria.Inputs[Entrada de Dimensão de Alteração Lenta]"
+              name="Saída de Conversão de Dados"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR.Outputs[Saída de Conversão de Dados]" />
+            <path
+              refId="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Origem de Arquivo Simples]"
+              endId="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las.Inputs[Classificar Entrada]"
+              name="Saída de Origem de Arquivo Simples"
+              startId="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias.Outputs[Saída de Origem de Arquivo Simples]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--Esta seção CDATA contém as informações de layout do pacote. A seção inclui informações como coordenadas (x,y), largura e altura.-->
@@ -3679,11 +4669,15 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
         <NodeLayout
           Size="185,42"
           Id="Package\Criação da Dimensão Cliente"
-          TopLeft="226,39" />
+          TopLeft="208,14" />
         <NodeLayout
           Size="185,42"
           Id="Package\Criação da Dimensão Fábrica"
           TopLeft="8,14" />
+        <NodeLayout
+          Size="301,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria"
+          TopLeft="35,71" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -3693,110 +4687,120 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="156,42"
-          Id="Package\Criação da Dimensão Cliente\Planilha de clientes"
-          TopLeft="67.5,5.5" />
+          Size="239,42"
+          Id="Package\Criação da Dimensão Cliente\Classificar Estado vindo de Região"
+          TopLeft="342,311.5" />
+        <NodeLayout
+          Size="369,42"
+          Id="Package\Criação da Dimensão Cliente\Criação de códigos para os níveis Cidade, Segmento e Região"
+          TopLeft="277,515.5" />
         <NodeLayout
           Size="246,42"
           Id="Package\Criação da Dimensão Cliente\Extração de Cidade e Estado juntos"
           TopLeft="22.5,107.5" />
-        <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Origem do Excel]"
-          TopLeft="145.5,47.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
-          Size="280,42"
-          Id="Package\Criação da Dimensão Cliente\Extração da Cidade e do Estado separados"
-          TopLeft="5.5,209.5" />
-        <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Coluna Derivada]"
-          TopLeft="145.5,149.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
+          Size="156,42"
+          Id="Package\Criação da Dimensão Cliente\Planilha de clientes"
+          TopLeft="67.5,5.5" />
         <NodeLayout
-          Size="230,42"
-          Id="Package\Criação da Dimensão Cliente\Arquivo CSV Estado com Região"
-          TopLeft="346.5,209.5" />
+          Size="193,42"
+          Id="Package\Criação da Dimensão Cliente\Conversão para Unicode"
+          TopLeft="365,617.5" />
         <NodeLayout
           Size="244,42"
           Id="Package\Criação da Dimensão Cliente\Classificar Estado vindo de Clientes"
           TopLeft="37.5,311.5" />
         <NodeLayout
-          Size="239,42"
-          Id="Package\Criação da Dimensão Cliente\Classificar Estado vindo de Região"
-          TopLeft="342,311.5" />
+          Size="172,42"
+          Id="Package\Criação da Dimensão Cliente\Comando OLE DB 1"
+          TopLeft="603.5,821.5" />
+        <NodeLayout
+          Size="280,42"
+          Id="Package\Criação da Dimensão Cliente\Extração da Cidade e do Estado separados"
+          TopLeft="5.5,209.5" />
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Criação da Dimensão Cliente\Comando OLE DB"
+          TopLeft="380.5,821.5" />
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Criação da Dimensão Cliente\Junção da Planilha com o CSV"
+          TopLeft="351.5,413.5" />
+        <NodeLayout
+          Size="217,42"
+          Id="Package\Criação da Dimensão Cliente\Dimensão de Alteração Lenta"
+          TopLeft="353,719.5" />
+        <NodeLayout
+          Size="148,42"
+          Id="Package\Criação da Dimensão Cliente\Inserir Destino"
+          TopLeft="171.5,821.5" />
+        <NodeLayout
+          Size="230,42"
+          Id="Package\Criação da Dimensão Cliente\Arquivo CSV Estado com Região"
+          TopLeft="346.5,209.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Coluna Derivada1]"
-          TopLeft="145.5,251.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="461.5,761.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="14,60"
+              EndConnector="0,60"
               Start="0,0"
-              End="14,52.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,26"
-                    Point2="0,30"
-                    Point3="4,30" />
-                  <mssgle:LineSegment
-                    End="10,30" />
-                  <mssgle:CubicBezierSegment
-                    Point1="10,30"
-                    Point2="14,30"
-                    Point3="14,34" />
-                  <mssgle:LineSegment
-                    End="14,52.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.12548828125,187.195390625,12.2490234375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Origem de Arquivo Simples]"
-          TopLeft="461.5,251.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="513.75,761.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175.75,60"
+              Start="0,0"
+              End="175.75,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4855842185129" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4855842185129"
+                    Point2="0,20.4855842185129"
+                    Point3="4,20.4855842185129" />
+                  <mssgle:LineSegment
+                    End="171.75,20.4855842185129" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171.75,20.4855842185129"
+                    Point2="175.75,20.4855842185129"
+                    Point3="175.75,24.4855842185129" />
+                  <mssgle:LineSegment
+                    End="175.75,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.4876953125,25.4855842185129,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída da Junção de Mesclagem]"
+          TopLeft="461.5,455.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3816,36 +4820,56 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="220,42"
-          Id="Package\Criação da Dimensão Cliente\Junção da Planilha com o CSV"
-          TopLeft="351.5,413.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Classificar Saída]"
-          TopLeft="159.5,353.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Nova Saída]"
+          TopLeft="409.25,761.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="266.666666666667,60"
+              EndConnector="-163.75,60"
               Start="0,0"
-              End="266.666666666667,52.5">
+              End="-163.75,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,31.7400722021661" />
+                    End="0,16.4855842185129" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,31.7400722021661"
-                    Point2="0,35.7400722021661"
-                    Point3="4,35.7400722021661" />
+                    Point1="0,16.4855842185129"
+                    Point2="0,20.4855842185129"
+                    Point3="-4,20.4855842185129" />
                   <mssgle:LineSegment
-                    End="262.666666666667,35.7400722021661" />
+                    End="-159.75,20.4855842185129" />
                   <mssgle:CubicBezierSegment
-                    Point1="262.666666666667,35.7400722021661"
-                    Point2="266.666666666667,35.7400722021661"
-                    Point3="266.666666666667,39.7400722021661" />
+                    Point1="-159.75,20.4855842185129"
+                    Point2="-163.75,20.4855842185129"
+                    Point3="-163.75,24.4855842185129" />
                   <mssgle:LineSegment
-                    End="266.666666666667,52.5" />
+                    End="-163.75,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-106.868359375,25.4855842185129,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Criação da Dimensão Cliente.Paths[Copiar Saída de Coluna]"
+          TopLeft="461.5,557.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3888,13 +4912,43 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="369,42"
-          Id="Package\Criação da Dimensão Cliente\Criação de códigos para os níveis Cidade, Segmento e Região"
-          TopLeft="277,515.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída da Junção de Mesclagem]"
-          TopLeft="461.5,455.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Classificar Saída]"
+          TopLeft="159.5,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="266.666666666667,60"
+              Start="0,0"
+              End="266.666666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.7400722021661" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.7400722021661"
+                    Point2="0,35.7400722021661"
+                    Point3="4,35.7400722021661" />
+                  <mssgle:LineSegment
+                    End="262.666666666667,35.7400722021661" />
+                  <mssgle:CubicBezierSegment
+                    Point1="262.666666666667,35.7400722021661"
+                    Point2="266.666666666667,35.7400722021661"
+                    Point3="266.666666666667,39.7400722021661" />
+                  <mssgle:LineSegment
+                    End="266.666666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Origem do Excel]"
+          TopLeft="145.5,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3914,13 +4968,9 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="193,42"
-          Id="Package\Criação da Dimensão Cliente\Conversão para Unicode"
-          TopLeft="365,617.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Copiar Saída de Coluna]"
-          TopLeft="461.5,557.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Origem de Arquivo Simples]"
+          TopLeft="461.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -3940,10 +4990,6 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="217,42"
-          Id="Package\Criação da Dimensão Cliente\Dimensão de Alteração Lenta"
-          TopLeft="353,719.5" />
         <EdgeLayout
           Id="Package\Criação da Dimensão Cliente.Paths[Saída de Conversão de Dados]"
           TopLeft="461.5,659.5">
@@ -3966,53 +5012,43 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="148,42"
-          Id="Package\Criação da Dimensão Cliente\Inserir Destino"
-          TopLeft="171.5,821.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Nova Saída]"
-          TopLeft="409.25,761.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Coluna Derivada1]"
+          TopLeft="145.5,251.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-163.75,60"
+              EndConnector="14,60"
               Start="0,0"
-              End="-163.75,52.5">
+              End="14,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,16.4855842185129" />
+                    End="0,26" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,16.4855842185129"
-                    Point2="0,20.4855842185129"
-                    Point3="-4,20.4855842185129" />
+                    Point1="0,26"
+                    Point2="0,30"
+                    Point3="4,30" />
                   <mssgle:LineSegment
-                    End="-159.75,20.4855842185129" />
+                    End="10,30" />
                   <mssgle:CubicBezierSegment
-                    Point1="-159.75,20.4855842185129"
-                    Point2="-163.75,20.4855842185129"
-                    Point3="-163.75,24.4855842185129" />
+                    Point1="10,30"
+                    Point2="14,30"
+                    Point3="14,34" />
                   <mssgle:LineSegment
-                    End="-163.75,52.5" />
+                    End="14,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-106.868359375,25.4855842185129,49.98671875,10.3349609375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="162,42"
-          Id="Package\Criação da Dimensão Cliente\Comando OLE DB"
-          TopLeft="380.5,821.5" />
         <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Atualizações de Membro Inferido]"
-          TopLeft="461.5,761.5">
+          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Coluna Derivada]"
+          TopLeft="145.5,149.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -4029,49 +5065,7 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-93.5976953125,20.12548828125,187.195390625,12.2490234375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Criação da Dimensão Cliente\Comando OLE DB 1"
-          TopLeft="603.5,821.5" />
-        <EdgeLayout
-          Id="Package\Criação da Dimensão Cliente.Paths[Saída de Atualizações de Atributo de Alteração]"
-          TopLeft="513.75,761.5">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="175.75,60"
-              Start="0,0"
-              End="175.75,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,16.4855842185129" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,16.4855842185129"
-                    Point2="0,20.4855842185129"
-                    Point3="4,20.4855842185129" />
-                  <mssgle:LineSegment
-                    End="171.75,20.4855842185129" />
-                  <mssgle:CubicBezierSegment
-                    Point1="171.75,20.4855842185129"
-                    Point2="175.75,20.4855842185129"
-                    Point3="175.75,24.4855842185129" />
-                  <mssgle:LineSegment
-                    End="175.75,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-15.4876953125,25.4855842185129,206.725390625,12.2490234375"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -4087,6 +5081,98 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Criação da Dimensão Cliente\Dimensão de Alteração Lenta">
+    <Properties>
+      <Property>
+        <Name>SCDMetadata</Name>
+        <Value
+          type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionID&gt;{FDFB7FC5-0D44-4CA3-B8C7-2287D09610AC}&lt;/ConnectionID&gt;
+  &lt;TableName&gt;[dbo].[Dim_Cliente]&lt;/TableName&gt;
+  &lt;InputToColumnsCollection&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Cidade]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Cidade&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Cliente]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Cliente&lt;/ColumnName&gt;
+      &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
+      &lt;ChangeType&gt;None&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Estado]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Estado&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Regiao]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Regiao&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Segmento]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Segmento&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Cidade]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Cidade&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Cliente]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Cliente&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Estado]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Estado&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Regiao]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Regiao&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+    &lt;InputColumnToDBColumn&gt;
+      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Segmento]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Segmento&lt;/ColumnName&gt;
+      &lt;KeyType&gt;None&lt;/KeyType&gt;
+      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
+    &lt;/InputColumnToDBColumn&gt;
+  &lt;/InputToColumnsCollection&gt;
+  &lt;GeneratedComponentsIdentificationStrings&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Inserir Destino&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB&lt;/anyType&gt;
+    &lt;anyType xsi:type="xsd:string"&gt;Comando OLE DB 1&lt;/anyType&gt;
+  &lt;/GeneratedComponentsIdentificationStrings&gt;
+  &lt;FailFixedAttribute&gt;false&lt;/FailFixedAttribute&gt;
+  &lt;FailChangeAttribute&gt;false&lt;/FailChangeAttribute&gt;
+  &lt;UseStartEndDate&gt;false&lt;/UseStartEndDate&gt;
+  &lt;CurrentIndicatorColumn /&gt;
+  &lt;InferredIndicatorColumn /&gt;
+  &lt;ValueCurrent /&gt;
+  &lt;ValueExpired /&gt;
+  &lt;StartDateColumn /&gt;
+  &lt;EndDateColumn /&gt;
+  &lt;DateVariable /&gt;
+  &lt;EnableInferredSupport&gt;true&lt;/EnableInferredSupport&gt;
+&lt;/SCDWizardMetadata&gt;</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -4318,8 +5404,232 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Criação da DImensão Produto - Nível Categoria">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="224,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Leitura de Marcas e Categorias"
+          TopLeft="183.5,5.5" />
+        <NodeLayout
+          Size="275,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Extra apenas as categorias sem repeti-las"
+          TopLeft="158,107.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Origem de Arquivo Simples]"
+          TopLeft="295.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Cria a coluna do código"
+          TopLeft="201,209.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Classificar Saída]"
+          TopLeft="295.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="202,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Converte para NVARCHAR"
+          TopLeft="194.5,311.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Copiar Saída de Coluna]"
+          TopLeft="295.5,251.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria"
+          TopLeft="185.5,413.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Conversão de Dados]"
+          TopLeft="295.5,353.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="148,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Inserir Destino"
+          TopLeft="5.50000000000006,515.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Nova Saída]"
+          TopLeft="242.5,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-163,60"
+              Start="0,0"
+              End="-163,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4790419161677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4790419161677"
+                    Point2="0,20.4790419161677"
+                    Point3="-4,20.4790419161677" />
+                  <mssgle:LineSegment
+                    End="-159,20.4790419161677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-159,20.4790419161677"
+                    Point2="-163,20.4790419161677"
+                    Point3="-163,24.4790419161677" />
+                  <mssgle:LineSegment
+                    End="-163,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-106.493359375,25.4790419161677,49.98671875,10.3349609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="162,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB"
+          TopLeft="214.5,515.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Atualizações de Membro Inferido]"
+          TopLeft="295.5,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.5976953125,20.12548828125,187.195390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Criação da DImensão Produto - Nível Categoria\Comando OLE DB 1"
+          TopLeft="437.5,515.5" />
+        <EdgeLayout
+          Id="Package\Criação da DImensão Produto - Nível Categoria.Paths[Saída de Atualizações de Atributo de Alteração]"
+          TopLeft="348.5,455.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="175,60"
+              Start="0,0"
+              End="175,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4790419161677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4790419161677"
+                    Point2="0,20.4790419161677"
+                    Point3="4,20.4790419161677" />
+                  <mssgle:LineSegment
+                    End="171,20.4790419161677" />
+                  <mssgle:CubicBezierSegment
+                    Point1="171,20.4790419161677"
+                    Point2="175,20.4790419161677"
+                    Point3="175,24.4790419161677" />
+                  <mssgle:LineSegment
+                    End="175,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.8626953125,25.4790419161677,206.725390625,12.2490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Criação da Dimensão Cliente\Dimensão de Alteração Lenta">
+    design-time-name="Package\Criação da DImensão Produto - Nível Categoria\Gravação na Tabela Categoria">
     <Properties>
       <Property>
         <Name>SCDMetadata</Name>
@@ -4327,65 +5637,17 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
           type="q2:string">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SCDWizardMetadata xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;ConnectionID&gt;{FDFB7FC5-0D44-4CA3-B8C7-2287D09610AC}&lt;/ConnectionID&gt;
-  &lt;TableName&gt;[dbo].[Dim_Cliente]&lt;/TableName&gt;
+  &lt;TableName&gt;[dbo].[Dim_Categoria]&lt;/TableName&gt;
   &lt;InputToColumnsCollection&gt;
     &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Cidade]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Cod_Cidade&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Cliente]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Cod_Cliente&lt;/ColumnName&gt;
+      &lt;IdentificationString&gt;Converte para NVARCHAR.Saídas[Saída de Conversão de Dados].Colunas[Cod_Categoria]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Cod_Categoria&lt;/ColumnName&gt;
       &lt;KeyType&gt;BusinessKey&lt;/KeyType&gt;
       &lt;ChangeType&gt;None&lt;/ChangeType&gt;
     &lt;/InputColumnToDBColumn&gt;
     &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Estado]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Cod_Estado&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Regiao]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Cod_Regiao&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Cod_Segmento]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Cod_Segmento&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Cidade]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Desc_Cidade&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Cliente]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Desc_Cliente&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Estado]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Desc_Estado&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Regiao]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Desc_Regiao&lt;/ColumnName&gt;
-      &lt;KeyType&gt;None&lt;/KeyType&gt;
-      &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
-    &lt;/InputColumnToDBColumn&gt;
-    &lt;InputColumnToDBColumn&gt;
-      &lt;IdentificationString&gt;Conversão para Unicode.Saídas[Saída de Conversão de Dados].Colunas[Desc_Segmento]&lt;/IdentificationString&gt;
-      &lt;ColumnName&gt;Desc_Segmento&lt;/ColumnName&gt;
+      &lt;IdentificationString&gt;Converte para NVARCHAR.Saídas[Saída de Conversão de Dados].Colunas[Desc_Categoria]&lt;/IdentificationString&gt;
+      &lt;ColumnName&gt;Desc_Categoria&lt;/ColumnName&gt;
       &lt;KeyType&gt;None&lt;/KeyType&gt;
       &lt;ChangeType&gt;ChangingAttribute&lt;/ChangeType&gt;
     &lt;/InputColumnToDBColumn&gt;
