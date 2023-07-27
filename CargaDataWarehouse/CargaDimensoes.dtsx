@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="CargaDimensoes"
   DTS:PackageType="5"
-  DTS:VersionBuild="60"
-  DTS:VersionGUID="{E0DC969A-3E4B-401E-BF8B-472646176E95}">
+  DTS:VersionBuild="61"
+  DTS:VersionGUID="{D04125C2-A77B-4B61-898A-072AA3DD633E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -12023,6 +12023,7 @@ SELECT'003' AS CODIGO, 'Fáb. do Nordeste' AS DESCRITOR</property>
       DTS:refId="Package\Criação da Dimensão Tempo"
       DTS:CreationName="Microsoft.Pipeline"
       DTS:Description="Tarefa Fluxo de Dados"
+      DTS:Disabled="True"
       DTS:DTSID="{B65D08F0-3611-4AB7-8A83-E92681C8A809}"
       DTS:ExecutableType="Microsoft.Pipeline"
       DTS:LocaleID="-1"
