@@ -2,7 +2,9 @@
 
 Projeto desenvolvido pelos cursos [ETL com Integration Services: modelo de dados](https://cursos.alura.com.br/course/business-intelligence-sql-server-e-integration-services) e [ETL com Integration Services: transformação de dados](https://cursos.alura.com.br/course/business-intelligence-sql-server-e-integration-services-parte2), na plataforma da **[Alura](https://www.alura.com.br/)**.
 
-<div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do dashboard Alura Pets"></div>
+<div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do Data Warehouse"></div>
+<div align='center style='display: inline_block'><img src="https://i.imgur.com/YW0o6Jl.png" alt="Png de uma procedure SQL no SSIS dentro do Visual Studio"></div>
+
 
 ## Sobre o projeto
 Para uma empresa fictícia de sucos, no primeiro curso foi implementado um modelo de Business Intelligence com o Data Warehouse. Criou-se o banco de dados, as tabelas de dimensões e de fato (tanto por grid quanto por T-SQL) e também foram carregados dados na dimensão.
