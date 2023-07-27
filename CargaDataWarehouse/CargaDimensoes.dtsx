@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="CargaDimensoes"
   DTS:PackageType="5"
-  DTS:VersionBuild="56"
-  DTS:VersionGUID="{13E5FD7E-AA17-45D5-B355-8BCF1B58DD5A}">
+  DTS:VersionBuild="60"
+  DTS:VersionGUID="{E0DC969A-3E4B-401E-BF8B-472646176E95}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -174,6 +174,44 @@
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{5F01F2C6-D2DB-48AF-87E5-A0F33E757B6E}"
+      DTS:ObjectName="Ano_Final">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">2013</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{45F85F81-C575-4602-AFF5-66DBFFA13398}"
+      DTS:ObjectName="Ano_Inicial">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">2013</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{AF423770-7245-4022-BA3F-11EEAE5069A5}"
+      DTS:ObjectName="Mes_Final">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">7</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{00BB10C2-4D63-4456-8FB7-456F5654F0CD}"
+      DTS:ObjectName="Mes_Inicial">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">1</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables />
   <DTS:Executables>
     <DTS:Executable
@@ -13314,10 +13352,10 @@ DECLARE @DIMDATE TABLE
 		[Tipo_Dia] NVARCHAR(50) -- Dia Útil ou Fim de Semana
 	)
 
-DECLARE @AnoInicial VARCHAR(4) = '2013'
-DECLARE @MesInicial VARCHAR(2) = '1'
-DECLARE @AnoFinal VARCHAR(4) = '2013'
-DECLARE @MesFinal VARCHAR(2) = '6'
+DECLARE @AnoInicial VARCHAR(4) = ?
+DECLARE @MesInicial VARCHAR(2) = ?
+DECLARE @AnoFinal VARCHAR(4) = ?
+DECLARE @MesFinal VARCHAR(2) = ?
 
 DECLARE @StartDate DATETIME
 Select @StartDate = CAST(@AnoInicial + '/' + @MesInicial + '/01' AS DATETIME)
@@ -13537,7 +13575,7 @@ SELECT * FROM @DIMDATE order by Cod_Dia</property>
                 <property
                   dataType="System.String"
                   description="Os mapeamentos entre os parâmetros no comando SQL e as variáveis."
-                  name="ParameterMapping"></property>
+                  name="ParameterMapping">"Parâmetro0:Input",{45F85F81-3A8A-4602-AFF5-66DBFFA13398};"Parâmetro1:Input",{00BB10C2-B29C-4456-8FB7-456F5654F0CD};"Parâmetro2:Input",{5F01F2C6-2D24-48AF-87E5-A0F33E757B6E};"Parâmetro3:Input",{AF423770-8DBA-4022-BA3F-11EEAE5069A5};</property>
               </properties>
               <connections>
                 <connection
