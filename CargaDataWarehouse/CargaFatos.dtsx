@@ -11,8 +11,8 @@
   DTS:LocaleID="1046"
   DTS:ObjectName="CargaFatos"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{FD81D1E0-9F6C-4003-B1D1-3EFAD46E6D21}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{EAFDC3D0-404B-4721-BB85-B07155D71245}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -5001,23 +5001,23 @@ AND MONTH(DATA_FATO) &lt;= ?</property>
         <NodeLayout
           Size="148,42"
           Id="Package\Carga Fato001"
-          TopLeft="27,23" />
+          TopLeft="85,44" />
         <NodeLayout
           Size="148,42"
           Id="Package\Carga Fato002"
-          TopLeft="196,22" />
+          TopLeft="254,43" />
         <NodeLayout
           Size="148,42"
           Id="Package\Carga Fato003"
-          TopLeft="366,24" />
+          TopLeft="424,45" />
         <NodeLayout
           Size="148,42"
           Id="Package\Carga Fato004"
-          TopLeft="90,79" />
+          TopLeft="173,98" />
         <NodeLayout
           Size="148,42"
           Id="Package\Carga Fato005"
-          TopLeft="284,78" />
+          TopLeft="337,97" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
