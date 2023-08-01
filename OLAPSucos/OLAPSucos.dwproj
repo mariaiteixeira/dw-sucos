@@ -27,6 +27,16 @@
         </ProjectItem>
       </Dependencies>
     </ProjectItem>
+    <ProjectItem>
+      <Name>PRESIDÊNCIA.cube</Name>
+      <FullPath>PRESIDÊNCIA.cube</FullPath>
+      <Dependencies>
+        <ProjectItem>
+          <Name>PRESIDÊNCIA.partitions</Name>
+          <FullPath>PRESIDÊNCIA.partitions</FullPath>
+        </ProjectItem>
+      </Dependencies>
+    </ProjectItem>
   </Cubes>
   <Dimensions>
     <ProjectItem>
