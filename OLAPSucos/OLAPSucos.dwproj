@@ -23,6 +23,10 @@
       <Name>Organizacional.dim</Name>
       <FullPath>Organizacional.dim</FullPath>
     </ProjectItem>
+    <ProjectItem>
+      <Name>Tempo.dim</Name>
+      <FullPath>Tempo.dim</FullPath>
+    </ProjectItem>
   </Dimensions>
   <DataSources>
     <ProjectItem>
