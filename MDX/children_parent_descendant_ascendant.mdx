@@ -1,0 +1,29 @@
+-- Abaixo retorna o faturamento da região sudeste, dos meses janeiro até dezembro de 2014.
+
+Select ({[Cliente].[Hierarquia Geográfica].[Nível Região].&[Sudeste]}) On Rows,
+({[Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]}) On Columns
+From [COMPLETO] Where ([Measures].[Faturamento])
+
+-- O .Children retorna o faturamento dos meses janeiro até dezembro de 2014 dos estados da região sudeste, pois são os membros filhos de "Sudeste"
+
+Select ({[Cliente].[Hierarquia Geográfica].[Nível Região].&[Sudeste].Children}) On Rows,
+({[Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]}) On Columns
+From [COMPLETO] Where ([Measures].[Faturamento])
+
+-- O .Parent retorna o faturamento dos meses janeiro até dezembro de 2014 do sul, que é o membro pai de "Rio Grande do Sul" (nas rows/linhas)
+
+Select ({[Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul].Parent}) On Rows,
+({[Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]}) On Columns
+From [COMPLETO] Where ([Measures].[Faturamento])
+
+-- Descendants é uma função para retornar todos membros filhos (no caso os filhos do "Rio Grande do Sul")
+
+Select ({Descendants([Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul])}) On Rows,
+({[Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]}) On Columns
+From [COMPLETO] Where ([Measures].[Faturamento])
+
+-- Ascendants é uma função para retornar todos membros pais (no caso os pais do "Delícias Lanches Porto Alegre - RS")
+
+Select ({Ascendants([Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul].&[Porto Alegre].&[Delícias Lanches Porto Alegre - RS])}) On Rows,
+({[Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]}) On Columns
+From [COMPLETO] Where ([Measures].[Faturamento])

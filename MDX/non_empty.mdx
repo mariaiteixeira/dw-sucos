@@ -1,0 +1,6 @@
+-- Na consulta abaixo, utilizamos a cláusula "Non Empty". Isso retira os valores nulos da nossa consulta!
+
+Select Non Empty ( { [Produto].[Produto].Members } ) On Rows,
+( { [Measures].[Faturamento] } ) On Columns
+from [COMPLETO]
+where ( [Cliente].[Hierarquia Segmento].[Nível Segmento].&[Farmácias].&[Drogas Super Brasília - DF] )
