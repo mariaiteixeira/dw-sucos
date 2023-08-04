@@ -1,6 +1,6 @@
 # Data Warehouse Sucos
 
-Projeto desenvolvido pela formação [BI e Data Warehouse com SQL Server e Power BI](https://cursos.alura.com.br/formacao-business-intelligence-data-warehouse)* na plataforma da **[Alura](https://www.alura.com.br/)*. Atualmente o projeto está acompanhando o quinto curso, [Consultas Multidimensionais: MDX com SQL Server](https://cursos.alura.com.br/course/business-intelligence-mdx-sql-server)
+Projeto desenvolvido pela formação [BI e Data Warehouse com SQL Server e Power BI](https://cursos.alura.com.br/formacao-business-intelligence-data-warehouse) na plataforma da **[Alura](https://www.alura.com.br/)**. Atualmente o projeto está acompanhando o quinto curso, [Consultas Multidimensionais: MDX com SQL Server](https://cursos.alura.com.br/course/business-intelligence-mdx-sql-server)
 
 <div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do Data Warehouse"></div>
 <div align='center style='display: inline_block'><img src="https://i.imgur.com/YW0o6Jl.png" alt="Png de uma procedure SQL no SSIS dentro do Visual Studio"></div>
