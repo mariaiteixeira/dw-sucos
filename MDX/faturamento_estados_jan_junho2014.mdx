@@ -1,0 +1,8 @@
+-- Aqui nós utilizamos os dois pontos entre janeiro de 2014 e junho de 2014, dentro da dimensão tempo.
+-- E também o .Members pra pegar todos os estados dentro da dimensão cliente.
+-- A consulta é basicamente o faturamento como medida e como dimensão o tempo nas colunas x os estados nas linhas :)
+
+Select ({[Cliente].[Estado].Members}) on Rows,
+( { [Tempo].[Mës e Ano].&[2014]&[01-2014]&[01-2014]&[01-2014]:[Tempo].[Mës e Ano].&[2014]&[01-2014]&[02-2014]&[06-2014]})
+on Columns
+from [COMPLETO] where ([Measures].[Faturamento])
