@@ -1,0 +1,16 @@
+-- O CROSSJOIN faz um cruzamento dentro do eixo para duas dimensões diferentes. Abaixo, um exemplo
+
+Select Non Empty (CROSSJOIN ( { [Measures].[Faturamento], [Measures].[Margem] }, { [Cliente].[Estado].&[São Paulo], [Cliente].[Estado].&[Rio de Janeiro] } ) ) On Rows,
+( {[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].&[2013]&[01-2013]&[01-2013]&[01-2013] : 
+[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Segundo Semestre 2013].&[2013]&[02-2013]&[03-2013].&[2013]&[02-2013]&[03-2013]&[07-2013] } ) On Columns
+from [COMPLETO]
+
+-- Exemplo maior abaixo e com a cláusula .Members
+
+Select Non Empty
+(CROSSJOIN ( { [Produto].[Produto].Members },
+(CROSSJOIN ( { [Measures].[Faturamento], [Measures].[Margem] }, {[Cliente].[Cliente].Members} ) ) ) )
+On Rows,
+( {[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].&[2013]&[01-2013]&[01-2013]&[01-2013] : 
+[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Segundo Semestre 2013].&[2013]&[02-2013]&[03-2013].&[2013]&[02-2013]&[03-2013]&[07-2013] } ) On Columns
+from [COMPLETO]

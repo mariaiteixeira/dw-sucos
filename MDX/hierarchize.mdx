@@ -1,0 +1,19 @@
+Select ({[Cliente].[Estado].&[São Paulo], [Cliente].[Estado].&[Goiais], [Cliente].[Estado].&[Paraná], [Cliente].[Estado].&[Bahia]}) On Rows,
+({[Tempo].[Semestre e Ano].Members}) On Columns
+from [COMPLETO]
+
+-- Abaixo, utilizamos a cláusula Hierarchize. Ela ordena hierarquicamente os membros de um conjunto!
+
+Select Hierarchize({[Cliente].[Estado].&[São Paulo], [Cliente].[Estado].&[Goiais], [Cliente].[Estado].&[Paraná], [Cliente].[Estado].&[Bahia]}) On Rows,
+({[Tempo].[Semestre e Ano].Members}) On Columns
+from [COMPLETO]
+
+-- Mais um exemplo, mas aqui invertemos o que estava nas colunas e nas linhas
+
+Select ({[Cliente].[Estado].&[São Paulo], [Cliente].[Estado].&[Goiais], [Cliente].[Estado].&[Paraná], [Cliente].[Estado].&[Bahia]}) On Columns,
+({[Tempo].[Semestre e Ano].Members}) On Rows
+from [COMPLETO]
+
+Select Hierarchize({[Cliente].[Estado].&[São Paulo], [Cliente].[Estado].&[Goiais], [Cliente].[Estado].&[Paraná], [Cliente].[Estado].&[Bahia]}) On Columns,
+({[Tempo].[Semestre e Ano].Members}) On Rows
+from [COMPLETO]
