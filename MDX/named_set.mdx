@@ -1,0 +1,37 @@
+
+-- Consulta de exemplo
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]}) On Rows,
+[Measures].[Faturamento Líquido] On Columns
+from [COMPLETO]
+
+-- Agora vamos nomear um set! Ao invés de repetir toda a tupla gigantesca, podemos nomear e utilizar de forma mais simples
+-- Para as próximas consultas
+With Set [6 Primeiros Meses de 2013] As
+'{[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]}'
+Select ({[6 Primeiros Meses de 2013]}) On Rows,
+[Measures].[Faturamento Líquido] On Columns
+from [COMPLETO]
+
+-- Vamos usar essa nomeação agora com uma função de soma!
+With Set [6 Primeiros Meses de 2013] As
+'{[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]}'
+Member [Tempo].[Mës e Ano].[Soma dos Primeiros Meses de 2013] As
+'SUM([6 Primeiros Meses de 2013], [Measures].[Faturamento Líquido])'
+Select ({[6 Primeiros Meses de 2013], [Tempo].[Mës e Ano].[Soma dos Primeiros Meses de 2013]}) On Rows,
+[Measures].[Faturamento Líquido] On Columns
+from [COMPLETO]
