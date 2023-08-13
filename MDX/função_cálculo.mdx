@@ -1,0 +1,64 @@
+
+-- Consulta de exemplo
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]}) On Rows,
+[Measures].[Margem] On Columns
+from [COMPLETO]
+
+-- Função de soma com o "SUM"
+With Member [Tempo].[Mës e Ano].[Soma] As
+'SUM({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]},[Measures].[Margem])'
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013],
+[Tempo].[Mës e Ano].[Soma]}) On Rows,
+[Measures].[Margem] On Columns
+from [COMPLETO]
+
+-- Agora, no lugar da soma, temos a média com a função "AVG"
+With Member [Tempo].[Mës e Ano].[Média] As
+'AVG({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]},[Measures].[Margem])'
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013],
+[Tempo].[Mës e Ano].[Média]}) On Rows,
+[Measures].[Margem] On Columns
+from [COMPLETO]
+
+-- E outro exemplo de função de cálculo é a "MAX", que nos retorna o valor máximo da consulta
+With Member [Tempo].[Mës e Ano].[Máximo] As
+'MAX({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]},[Measures].[Margem])'
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013],
+[Tempo].[Mës e Ano].[Máximo]}) On Rows,
+[Measures].[Margem] On Columns
+from [COMPLETO]
