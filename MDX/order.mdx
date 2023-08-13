@@ -1,0 +1,59 @@
+
+-- Query de exemplo para aprendermos o "Order" no MDX.
+Select ({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]}) On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
+
+-- Vamos usar a função "Order"! Ali estaremos mostrando a query acima porém sorteando por ordem "Desc", ou seja, dos maiores para os menores. E essa ordem é pelo
+-- faturamento
+Select Order (({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]}),
+[Measures].[Faturamento], Desc)
+On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
+
+-- Aqui estamos fazendo a mesma, mas com a ordem "Asc", ou seja, dos menores para os maiores.
+Select Order (({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]}),
+[Measures].[Faturamento], Asc)
+On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
+
+-- Vamos agora fazer com o "CROSSJOIN"! E para isso, utilizamos os membros de cidade do Rio, SP e BH.
+Select Order (
+CROSSJOIN (
+({[Cliente].[Cidade].&[Rio de Janeiro], [Cliente].[Cidade].&[São Paulo], [Cliente].[Cidade].&[Belo Horizonte]}),
+({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]})
+)
+, [Measures].[Faturamento], Asc)
+On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
+
+-- Aqui fizemos a mesma consulta da acima, mas com "BAsc". A ordem fica independete das quebras dos membros! Legal, hein?
+Select Order (
+CROSSJOIN (
+({[Cliente].[Cidade].&[Rio de Janeiro], [Cliente].[Cidade].&[São Paulo], [Cliente].[Cidade].&[Belo Horizonte]}),
+({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]})
+)
+, [Measures].[Faturamento], BAsc)
+On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
+
+-- Na consulta abaixo, invertemos: agora foi com o BDesc!
+Select Order (
+CROSSJOIN (
+({[Cliente].[Cidade].&[Rio de Janeiro], [Cliente].[Cidade].&[São Paulo], [Cliente].[Cidade].&[Belo Horizonte]}),
+({[Produto].[Marca].&[Festival de Sabores],[Produto].[Marca].&[Pedaços de Frutas],[Produto].[Marca].&[Sabor da Montanha]})
+)
+, [Measures].[Faturamento], BDesc)
+On Rows,
+({[Tempo].[Ano].&[2014]}) On Columns
+from [COMPLETO]
+where ({[Measures].[Faturamento]})
