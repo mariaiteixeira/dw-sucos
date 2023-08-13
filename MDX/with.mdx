@@ -1,0 +1,38 @@
+
+-- Query inicial
+Select ({[Produto].[Categoria].Members}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento Líquido]}) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
+
+-- Vamos criar novos membros calculados! Para exemplificar, o Novo Faturamento Líquido é a mesma fórmula que o Faturamento Líquido
+With Member [Measures].[Novo Faturamento Líquido] As '[Measures].[Faturamento] - [Measures].[Frete Rateio] - [Measures].[Imposto]'
+Member [Measures].[Variação Faturamento] As
+'[Measures].[Novo Faturamento Líquido] / [Measures].[Faturamento]'
+Select ({[Produto].[Categoria].Members}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento Líquido], [Measures].[Novo Faturamento Líquido], [Measures].[Variação Faturamento]
+}) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
+
+-- E, que tal, formatarmos?
+With Member [Measures].[Novo Faturamento Líquido] As '[Measures].[Faturamento] - [Measures].[Frete Rateio] - [Measures].[Imposto]',
+FORMAT_STRING = '#,###,##'
+Member [Measures].[Variação Faturamento] As
+'[Measures].[Novo Faturamento Líquido] / [Measures].[Faturamento]',
+FORMAT_STRING = '#,###,##%'
+Select ({[Produto].[Categoria].Members}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento Líquido], [Measures].[Novo Faturamento Líquido], [Measures].[Variação Faturamento]
+}) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
+
+-- Vamos apresentar a variação de fevereiro pra janeiro abaixo
+With Member [Tempo].[Mës e Ano].[Var Fev Jan] As
+'(1 - ([Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013] / [Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013]))',
+FORMAT_STRING = '#,###.00 %'
+Select ({[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013], [Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+[Tempo].[Mës e Ano].[Var Fev Jan]}) On Columns,
+({[Produto].[Marca].Members}) On Rows
+from [COMPLETO]
+where ([Measures].[Faturamento])
