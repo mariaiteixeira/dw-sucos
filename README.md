@@ -11,7 +11,9 @@ Para uma empresa fictícia de sucos, no primeiro curso foi implementado um model
 
 No segundo, os dados além de serem carregados também foram transformados em diversas dimensões.
 
-No terceiro curso, iniciou-se a criação do **OLAP**! Para os Cubos, a linguagem **MDX** foi utilizada.
+No terceiro curso, iniciou-se a criação do **OLAP**! 
+
+Para consultar os Cubos, a linguagem **MDX** foi utilizada. Todos códigos em MDX estão comentados com a explicação sobre suas utilidades.
 
 ## Ao longo do projeto, as seguintes habilidades foram desenvolvidas:
 - Matriz (dimensão e indicador);
@@ -32,7 +34,7 @@ No terceiro curso, iniciou-se a criação do **OLAP**! Para os Cubos, a linguage
 - Como fazer a conversão de dados dentro do Visual Studio;
 - Como iniciar o processo para poder ver a mudança dentro do SSMS (SQL Server Management Studio);
 - Criação do OLAP/Cubo e de das dimensões pelo Visual Studio com o SSAS;
-- Criação de fórmulas para expressões no cubo, utilizando MDX.
+- Criação de fórmulas para consultas no cubo, utilizando MDX.
 
 ## Tecnologias utilizadas neste projeto:
 <img height="20" src="https://img.shields.io/badge/Visual_Studio-purple"> <img height="20" src="https://img.shields.io/badge/SSAS-darkblue"> <img height="20" src="https://img.shields.io/badge/SSDT-yellow"> <img height="20" src="https://img.shields.io/badge/SSIS-red"> <img height="20" src="https://img.shields.io/badge/TSQL-orange"> <img height="20" src="https://img.shields.io/badge/MDX-darkgreen"> <img height="20" src="https://img.shields.io/badge/SQL_Server-green"> 
