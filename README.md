@@ -33,7 +33,7 @@ Para consultar os Cubos, a linguagem **MDX** foi utilizada. Todos códigos em MD
 - Etapa *Dimensão de Alteração Lenta*;
 - Como fazer a conversão de dados dentro do Visual Studio;
 - Como iniciar o processo para poder ver a mudança dentro do SSMS (SQL Server Management Studio);
-- Criação do OLAP/Cubo e de das dimensões pelo Visual Studio com o SSAS;
+- Criação do OLAP/Cubo e das dimensões pelo Visual Studio com o SSAS;
 - Criação de fórmulas para consultas no cubo, utilizando MDX.
 
 ## Tecnologias utilizadas neste projeto:
