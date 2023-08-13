@@ -1,0 +1,23 @@
+
+-- Consulta inicial: estamos vendo o faturamento pelo nível
+Select ({[Produto].[Hierarquia de Produtos].[Nível Marca].Members}) On Rows,
+([Measures].[Faturamento]) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
+
+-- Queremos limitar. Faturamento apenas maior ou igual a dez milhões aqui
+Select Filter (
+({[Produto].[Hierarquia de Produtos].[Nível Marca].Members}),
+[Measures].[Faturamento] >= 10000000) On Rows,
+([Measures].[Faturamento]) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
+
+-- Vamos ver os filtros com ordem? Quebra de descendência.
+Select Filter (Order
+(({[Produto].[Hierarquia de Produtos].[Nível Marca].Members}),
+[Measures].[Faturamento], BDesc),
+[Measures].[Faturamento] >= 10000000) On Rows,
+([Measures].[Faturamento]) On Columns
+from [COMPLETO]
+where ([Tempo].[Ano].&[2014])
