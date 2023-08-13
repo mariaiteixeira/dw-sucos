@@ -1,0 +1,31 @@
+
+-- Query de exemplo
+Select Non Empty ({[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].Children}) On Rows,
+({[Measures].[Faturamento]}) On Columns
+from [COMPLETO]
+
+-- Calculamos com o membro "Primeiro Trimestre 2013" e a dimensão "Faturamento"
+With Member [Measures].[% Taxa Variação] As
+'[Measures].[Faturamento] / ([Measures].[Faturamento],[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013])',
+FORMAT_STRING = '#,###.## %'
+Select Non Empty ({[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].Children}) On Rows,
+({[Measures].[Faturamento], [Measures].[% Taxa Variação]}) On Columns
+from [COMPLETO]
+
+-- Na query abaixo podemos ver as diversas variações e aproveitamos a recursividade do .Currentmember!
+With Member [Measures].[% Taxa Variação Trimestre] As
+'[Measures].[Faturamento] / 
+([Measures].[Faturamento], [Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent)',
+FORMAT_STRING = '#,###.## %'
+Member [Measures].[% Taxa Variação Semestre] As
+'[Measures].[Faturamento] / 
+([Measures].[Faturamento], [Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent.Parent)',
+FORMAT_STRING = '#,###.## %'
+Member [Measures].[% Taxa Variação Ano] As
+'[Measures].[Faturamento] / 
+([Measures].[Faturamento], [Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent.Parent.Parent)',
+FORMAT_STRING = '#,###.## %'
+Select Non Empty
+({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members}) On Rows,
+({[Measures].[Faturamento], [Measures].[% Taxa Variação Trimestre], [% Taxa Variação Semestre], [% Taxa Variação Ano]}) On Columns
+from [COMPLETO]
