@@ -34,7 +34,7 @@ On Rows,
 from [COMPLETO]
 where ({[Measures].[Faturamento]})
 
--- Aqui fizemos a mesma consulta da acima, mas com "BAsc". A ordem fica independete das quebras dos membros! Legal, hein?
+-- Aqui fizemos a mesma consulta da acima, mas com "BAsc". A ordem fica independete das quebras da hierarquia! Legal, hein?
 Select Order (
 CROSSJOIN (
 ({[Cliente].[Cidade].&[Rio de Janeiro], [Cliente].[Cidade].&[São Paulo], [Cliente].[Cidade].&[Belo Horizonte]}),
