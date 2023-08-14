@@ -1,0 +1,12 @@
+-- Query de exemplo
+Select Non Empty ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members}) On Rows,
+({[Measures].[Faturamento]}) On Columns
+from [COMPLETO]
+
+-- Soma acumulada com o PeriodsToDate. Eita!
+With Member [Measures].[Faturamento YTD] As
+'SUM(PeriodsToDate([Tempo].[Hierarquia do Mês e Ano].[Ano], [Tempo].[Hierarquia do Mês e Ano].Currentmember), [Measures].[Faturamento])',
+FORMAT_STRING = "##,###.00"
+Select Non Empty ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento YTD]}) On Columns
+from [COMPLETO]
