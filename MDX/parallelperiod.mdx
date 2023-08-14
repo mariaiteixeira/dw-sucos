@@ -1,0 +1,31 @@
+-- Query de exemplo
+Select ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano]}) On Rows,
+({[Measures].[Faturamento]}) On Columns
+from [COMPLETO]
+
+-- Deslocou o valor de dois meses depois (dois membros depois)
+With Member [Measures].[Faturamento Desce 2]
+As
+'([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], 2, [Tempo].[Hierarquia do Mês e Ano].Currentmember))',
+FORMAT_STRING = "#,###.00"
+Select ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano]}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento Desce 2]}) On Columns
+from [COMPLETO]
+
+-- Aqui vamos subir o valor para seis meses antes
+With Member [Measures].[Faturamento Sobe 6]
+As
+'([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], -6, [Tempo].[Hierarquia do Mês e Ano].Currentmember))',
+FORMAT_STRING = "#,###.00"
+Select ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano]}) On Rows,
+({[Measures].[Faturamento], [Measures].[Faturamento Sobe 6]}) On Columns
+from [COMPLETO]
+
+-- Aqui vamos descer o valor para doze meses depois. Assim podemos comparar o valor para cada mês porém em anos diferentes!
+With Member [Measures].[Variação Faturamento Ano]
+As
+'([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], 12, [Tempo].[Hierarquia do Mês e Ano].Currentmember))',
+FORMAT_STRING = "#,###.00"
+Select ({[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano]}) On Rows,
+({[Measures].[Faturamento], [Measures].[Variação Faturamento Ano]}) On Columns
+from [COMPLETO]
