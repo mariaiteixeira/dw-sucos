@@ -1,0 +1,96 @@
+-- Query para ordenar o faturamento de vendas do maior para o menor
+With
+Set [CLIENTES] As
+'Order([Cliente].[Hierarquia Geográfica].[Nível Cliente], [Measures].[Faturamento], BDesc)'
+Member [Measures].[Faturamento de Vendas] As
+'[Measures].[Faturamento]',
+FORMAT_STRING = "##,###.00"
+Select ({[CLIENTES]}) On Rows,
+({[Measures].[Faturamento de Vendas]}) On Columns
+from [COMPLETO]
+Where ({[Tempo].[Ano].&[2014]})
+
+-- Além de mostrarmos em ordem do maior para o menor, aqui também colocaremos o rank das marcas!
+With
+Set [CLIENTES] As
+'Order([Cliente].[Hierarquia Geográfica].[Nível Cliente], [Measures].[Faturamento], BDesc)'
+Member [Measures].[Posição no Rank] As
+'RANK([Cliente].[Hierarquia Geográfica].Currentmember, [CLIENTES])',
+FORMAT_STRING = "#;#;-"
+Member [Measures].[Faturamento de Vendas] As
+'[Measures].[Faturamento]',
+FORMAT_STRING = "##,###.00"
+Select ({[CLIENTES]}) On Rows,
+({[Measures].[Faturamento de Vendas], [Measures].[Posição no Rank]}) On Columns
+from [COMPLETO]
+Where ({[Tempo].[Ano].&[2014]})
+
+-- Adicionar um percentual para mostrar a porcentagem de vendas
+With
+Set [CLIENTES] As
+'Order([Cliente].[Hierarquia Geográfica].[Nível Cliente], [Measures].[Faturamento], BDesc)'
+Member [Measures].[Posição no Rank] As
+'RANK([Cliente].[Hierarquia Geográfica].Currentmember, [CLIENTES])',
+FORMAT_STRING = "#;#;-"
+Member [Measures].[Faturamento de Vendas] As
+'[Measures].[Faturamento]',
+FORMAT_STRING = "##,###.00"
+Member [Measures].[% Vendas] As
+'[Measures].[Faturamento] / ([Measures].[Faturamento], [Cliente].[Hierarquia Geográfica].[All])',
+FORMAT_STRING = "##,###.00 %"
+Select ({[CLIENTES]}) On Rows,
+({[Measures].[Faturamento de Vendas], [Measures].[Posição no Rank], [Measures].[% Vendas]}) On Columns
+from [COMPLETO]
+Where ({[Tempo].[Ano].&[2014]})
+
+-- Nova coluna: a de faturamento acumulado!
+With
+Set [CLIENTES] As
+'Order([Cliente].[Hierarquia Geográfica].[Nível Cliente], [Measures].[Faturamento], BDesc)'
+Member [Measures].[Posição no Rank] As
+'RANK([Cliente].[Hierarquia Geográfica].Currentmember, [CLIENTES])',
+FORMAT_STRING = "#;#;-"
+Member [Measures].[Faturamento de Vendas] As
+'[Measures].[Faturamento]',
+FORMAT_STRING = "##,###.00"
+Member [Measures].[% Vendas] As
+'[Measures].[Faturamento] / ([Measures].[Faturamento], [Cliente].[Hierarquia Geográfica].[All])',
+FORMAT_STRING = "#,###.00 %"
+Member [Measures].[Faturamento Acumulado] As
+'SUM(HEAD([CLIENTES], [Measures].[Posição no Rank]),[Measures].[Faturamento])',
+FORMAT_STRING = "#,###.00"
+Select ({[CLIENTES]}) On Rows,
+({[Measures].[Faturamento de Vendas], [Measures].[Posição no Rank], [Measures].[% Vendas], [Measures].[Faturamento Acumulado]}) On Columns
+from [COMPLETO]
+Where ({[Tempo].[Ano].&[2014]})
+
+-- Novas colunas: a de clientes acumulados e vendas acumuladas
+With
+Set [CLIENTES] As
+'Order([Cliente].[Hierarquia Geográfica].[Nível Cliente], [Measures].[Faturamento], BDesc)'
+Member [Measures].[Posição no Rank] As
+'RANK([Cliente].[Hierarquia Geográfica].Currentmember, [CLIENTES])',
+FORMAT_STRING = "#;#;-"
+Member [Measures].[Faturamento de Vendas] As
+'[Measures].[Faturamento]',
+FORMAT_STRING = "##,###.00"
+Member [Measures].[% Vendas] As
+'[Measures].[Faturamento] / ([Measures].[Faturamento], [Cliente].[Hierarquia Geográfica].[All])',
+FORMAT_STRING = "#,###.00 %"
+Member [Measures].[Faturamento Acumulado] As
+'SUM(HEAD([CLIENTES], [Measures].[Posição no Rank]),[Measures].[Faturamento])',
+FORMAT_STRING = "#,###.00"
+Member [Measures].[Total de Clientes] As
+'[CLIENTES].Count',
+FORMAT_STRING = "#;#;-"
+Member [Measures].[% Número Clientes] As
+'[Measures].[Posição no Rank] / [Measures].[Total de Clientes]',
+FORMAT_STRING = "#,###.00 %"
+Member [Measures].[% Vendas Acumuladas] As
+'SUM(HEAD([CLIENTES], [Measures].[Posição no Rank]),[Measures].[% Vendas])',
+FORMAT_STRING = "#,###.00 %"
+Select ({[CLIENTES]}) On Rows,
+({[Measures].[Faturamento de Vendas], [Measures].[Posição no Rank], [Measures].[% Vendas], [Measures].[Faturamento Acumulado],
+[Measures].[Total de Clientes], [Measures].[% Número Clientes], [Measures].[% Vendas Acumuladas]}) On Columns
+from [COMPLETO]
+Where ({[Tempo].[Ano].&[2014]})

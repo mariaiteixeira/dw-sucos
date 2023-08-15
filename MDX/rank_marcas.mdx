@@ -1,0 +1,75 @@
+-- Query para ordenar a margem por marca, da maior para a menor
+With
+Set [MARCAS] As
+'Order([Produto].[Hierarquia de Produtos].[Nível Marca], [Measures].[Margem], BDesc)'
+Member [Measures].[Margem por Marca] As
+'[Measures].[Margem]', 
+FORMAT_STRING = "##,###.00"
+Select ({[MARCAS]}) On Rows,
+({[Measures].[Margem por Marca]}) On Columns
+from [COMPLETO]
+Where ([Tempo].[Ano].&[2014])
+
+-- Agora, vamos também rankear as marcas!
+With
+Set [MARCAS] As
+'Order([Produto].[Hierarquia de Produtos].[Nível Marca], [Measures].[Margem], BDesc)'
+Member [Measures].[Margem por Marca] As
+'[Measures].[Margem]', FORMAT_STRING = "##,###.00"
+Member [Measures].[Posição no Rank] As
+'RANK([Produto].[Hierarquia de Produtos].Currentmember, [MARCAS])', 
+FORMAT_STRING = "#;#;-"
+Select ({[MARCAS]}) On Rows,
+({[Measures].[Margem por Marca], [Measures].[Posição no Rank]}) On Columns
+from [COMPLETO]
+Where ([Tempo].[Ano].&[2014])
+
+-- Adicionar um percentual para mostrar a porcentagem de vendas e a margem acumulada
+With
+Set [MARCAS] As
+'Order([Produto].[Hierarquia de Produtos].[Nível Marca], [Measures].[Margem], BDesc)'
+Member [Measures].[Margem por Marca] As
+'[Measures].[Margem]', FORMAT_STRING = "##,###.00"
+Member [Measures].[Posição no Rank] As
+'RANK([Produto].[Hierarquia de Produtos].Currentmember, [MARCAS])', 
+FORMAT_STRING = "#;#;-"
+Member [Measures].[% Vendas] As
+'[Measures].[Margem] / ([Measures].[Margem], [Produto].[Hierarquia de Produtos].[All])',
+FORMAT_STRING = "##,###.00 %"
+Member [Measures].[Margem Acumulada] As
+'SUM(HEAD([MARCAS], [Measures].[Posição no Rank]),[Measures].[Margem])',
+FORMAT_STRING = "#,###.00"
+Select ({[MARCAS]}) On Rows,
+({[Measures].[Margem por Marca], [Measures].[Posição no Rank], [Measures].[% Vendas], [Measures].[Margem Acumulada]}) On Columns
+from [COMPLETO]
+Where ([Tempo].[Ano].&[2014])
+
+-- Novas colunas: % dos produtos e das margens!
+With
+Set [MARCAS] As
+'Order([Produto].[Hierarquia de Produtos].[Nível Marca], [Measures].[Margem], BDesc)'
+Member [Measures].[Margem por Marca] As
+'[Measures].[Margem]', FORMAT_STRING = "##,###.00"
+Member [Measures].[Posição no Rank] As
+'RANK([Produto].[Hierarquia de Produtos].Currentmember, [MARCAS])', 
+FORMAT_STRING = "#;#;-"
+Member [Measures].[% Vendas] As
+'[Measures].[Margem] / ([Measures].[Margem], [Produto].[Hierarquia de Produtos].[All])',
+FORMAT_STRING = "##,###.00 %"
+Member [Measures].[Margem Acumulada] As
+'SUM(HEAD([MARCAS], [Measures].[Posição no Rank]),[Measures].[Margem])',
+FORMAT_STRING = "#,###.00"
+MEMBER [Measures].[Total de Marcas] As
+'[MARCAS].Count',
+FORMAT_STRING = "#;#;-"
+MEMBER [Measures].[% Número Produtos] As
+'[Measures].[Posição no Rank] / [Measures].[Total de Marcas]',
+FORMAT_STRING = "#,###.00 %"
+Member [Measures].[% Vendas Acumuladas] As
+'SUM(HEAD([MARCAS], [Measures].[Posição no Rank]),[Measures].[% Vendas])',
+FORMAT_STRING = "#,###.00 %"
+Select ({[MARCAS]}) On Rows,
+({[Measures].[Margem por Marca], [Measures].[Posição no Rank], [Measures].[% Vendas], [Measures].[Margem Acumulada], [Measures].[% Número Produtos],
+[Measures].[% Vendas Acumuladas]}) On Columns
+from [COMPLETO]
+Where ([Tempo].[Ano].&[2014])
