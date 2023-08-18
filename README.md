@@ -1,6 +1,6 @@
 # Data Warehouse Sucos
 
-Projeto desenvolvido pela formação [BI e Data Warehouse com SQL Server e Power BI](https://cursos.alura.com.br/formacao-business-intelligence-data-warehouse) na plataforma da **[Alura](https://www.alura.com.br/)**. Atualmente o projeto está acompanhando o quinto curso, [Consultas Multidimensionais: MDX com SQL Server](https://cursos.alura.com.br/course/business-intelligence-mdx-sql-server)
+Projeto desenvolvido pela formação [BI e Data Warehouse com SQL Server e Power BI](https://cursos.alura.com.br/formacao-business-intelligence-data-warehouse) na plataforma da **[Alura](https://www.alura.com.br/)**.
 
 <div align='center' style='display: inline_block'><img src="https://i.imgur.com/SPcmcl1.gif" alt="Gif do Data Warehouse"></div>
 <div align='center style='display: inline_block'><img src="https://i.imgur.com/YW0o6Jl.png" alt="Png de uma procedure SQL no SSIS dentro do Visual Studio"></div>
@@ -13,7 +13,9 @@ No segundo, os dados além de serem carregados também foram transformados em di
 
 No terceiro curso, iniciou-se a criação do **OLAP**! 
 
-Para consultar os Cubos, a linguagem **MDX** foi utilizada. Todos códigos em MDX estão comentados com a explicação sobre suas utilidades.
+Para consultar os Cubos, a linguagem **MDX** foi utilizada. Todos códigos em MDX estão comentados com a explicação sobre suas utilidades. Isso foi visto no quarto curso.
+
+No último, finalmente criamos os relatórios! Utilizamos o **Power BI**.
 
 ## Ao longo do projeto, as seguintes habilidades foram desenvolvidas:
 - Matriz (dimensão e indicador);
@@ -35,9 +37,10 @@ Para consultar os Cubos, a linguagem **MDX** foi utilizada. Todos códigos em MD
 - Como iniciar o processo para poder ver a mudança dentro do SSMS (SQL Server Management Studio);
 - Criação do OLAP/Cubo e das dimensões pelo Visual Studio com o SSAS;
 - Criação de fórmulas para consultas no cubo, utilizando MDX.
+- Criação de relatórios pelo Power BI (gráficos, itens de KPI, cartões, segmentação de dados);
 
 ## Tecnologias utilizadas neste projeto:
-<img height="20" src="https://img.shields.io/badge/Visual_Studio-purple"> <img height="20" src="https://img.shields.io/badge/SSAS-darkblue"> <img height="20" src="https://img.shields.io/badge/SSDT-yellow"> <img height="20" src="https://img.shields.io/badge/SSIS-red"> <img height="20" src="https://img.shields.io/badge/TSQL-orange"> <img height="20" src="https://img.shields.io/badge/MDX-darkgreen"> <img height="20" src="https://img.shields.io/badge/SQL_Server-green"> 
+<img height="20" src="https://img.shields.io/badge/Visual_Studio-purple"> <img height="20" src="https://img.shields.io/badge/SSAS-darkblue"> <img height="20" src="https://img.shields.io/badge/SSDT-yellow"> <img height="20" src="https://img.shields.io/badge/SSIS-red"> <img height="20" src="https://img.shields.io/badge/TSQL-orange"> <img height="20" src="https://img.shields.io/badge/MDX-darkgreen"> <img height="20" src="https://img.shields.io/badge/SQL_Server-green"> <img height="20" src="https://img.shields.io/badge/Power_BI-black">
 
 ## Como reproduzir este repositório?
 Você pode fazer um `git clone` do repositório para a sua máquina.
