@@ -49,4 +49,4 @@ Você pode fazer um `git clone` do repositório para a sua máquina.
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
 ## Status
-<img height="20" src="https://img.shields.io/badge/Em%20progresso-yellow">
+<img src="https://img.shields.io/badge/Status-Finalizado-brightgreen">
